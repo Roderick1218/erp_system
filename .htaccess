@@ -1,0 +1,11 @@
+# Serve the app at http://localhost/erp without exposing the project root.
+# Static files come from public/, every other request (incl. .env, composer.json…)
+# goes through index.php so nothing outside public/ is ever served directly.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^public/ - [L]
+    RewriteRule ^index\.php$ - [L]
+    RewriteRule ^(css|js|images|build)/(.*)$ public/$1/$2 [L]
+    RewriteRule ^(favicon\.ico|robots\.txt)$ public/$1 [L]
+    RewriteRule ^ index.php [L]
+</IfModule>
